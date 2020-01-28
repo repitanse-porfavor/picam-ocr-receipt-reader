@@ -17,10 +17,6 @@ GPIO.setup(RUN_MOTOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # GPIO.setup(RUN_SCAN_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # GPIO.setup(ABORT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-# while True:
-#     print('yo')
-#     sleep(80)
-
 def listen_to_btns(self):
     while True:
         run_motor_btn_pressed = GPIO.input(RUN_MOTOR_PIN)
@@ -29,19 +25,15 @@ def listen_to_btns(self):
         
         if (run_motor_btn_pressed):
             self.feedReceipt = True
-            print("pressed", run_motor_btn_pressed)
             # break
         else:
             self.feedReceipt = False
-            print("pressed", run_motor_btn_pressed)
 
         # if (run_scan_btn_pressed):
 
         # if (abort_btn_pressed):
-
-        # print("pressed", run_motor_btn_pressed)
-
-    sleep(80)
-    # sleep(1000)
+        
+        print('run motor', run_motor_btn_pressed)
+        sleep(0.08)
 
 # GPIO.cleanup()

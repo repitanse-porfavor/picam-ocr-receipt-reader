@@ -30,13 +30,11 @@ GPIO.output(IN4, False)
 
 # 8 steps for 1 full rotation
 def Step1():
-    print("step1", stopStepper)
     GPIO.output(IN4, True)
     sleep (time)
     GPIO.output(IN4, False)
 
 def Step2():
-    print("step2", stopStepper)
     GPIO.output(IN4, True)
     GPIO.output(IN3, True)
     sleep (time)
@@ -44,13 +42,11 @@ def Step2():
     GPIO.output(IN3, False)
 
 def Step3():
-    print("step3", stopStepper)
     GPIO.output(IN3, True)
     sleep (time)
     GPIO.output(IN3, False)
 
 def Step4():
-    print("step4", stopStepper)
     GPIO.output(IN2, True)
     GPIO.output(IN3, True)
     sleep (time)
@@ -58,13 +54,11 @@ def Step4():
     GPIO.output(IN3, False)
 
 def Step5():
-    print("step5", stopStepper)
     GPIO.output(IN2, True)
     sleep (time)
     GPIO.output(IN2, False)
 
 def Step6():
-    print("step6", stopStepper)
     GPIO.output(IN1, True)
     GPIO.output(IN2, True)
     sleep (time)
@@ -72,13 +66,11 @@ def Step6():
     GPIO.output(IN2, False)
 
 def Step7():
-    print("step7", stopStepper)
     GPIO.output(IN1, True)
     sleep (time)
     GPIO.output(IN1, False)
 
 def Step8():
-    print("step8", stopStepper)
     GPIO.output(IN4, True)
     GPIO.output(IN1, True)
     sleep (time)
@@ -99,14 +91,13 @@ def stepperReverse(steps):
 stepperLastCommandFinished = True
 stopStepper = False
 
+# TODO: update for loop with while
 def stepperForward(self, steps):
     global stepperLastCommandFinished, stopStepper
-    print("stepper forward")
     stepperLastCommandFinished = False
-    stopStepper = not(self.feedReceipt)
 
     for i in range(steps):
-        print("stopStepper", stopStepper)
+        stopStepper = not(self.feedReceipt)
         # this is bad, lazy code
         if (stopStepper):
             stepperLastCommandFinished = True
@@ -150,21 +141,15 @@ def stepperForward(self, steps):
 # 512 one rotation
 
 def prepStepper(self):
-    print("prepStepper started")
     global stopStepper, stepperLastCommandFinished
     while True:
-        print("ps", self.feedReceipt)
         if (self.feedReceipt and stepperLastCommandFinished):
-            print("call stepper forward")
+            print('run stepper')
             stopStepper = False
             stepperForward(self, 512)
-            # break
         if (not(self.feedReceipt)):
-            print("elif")
             stopStepper = True
-            # break
-    # sleep(80)
-    sleep(1)
+        sleep(0.08)
 
 
 # GPIO.cleanup()

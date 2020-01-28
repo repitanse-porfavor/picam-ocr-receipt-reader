@@ -1,0 +1,2 @@
+- [ ] update stepper code to use while loop so it doesn't get interrupted
+    - just update the limit when it's still supposed to stay on otherwise break
